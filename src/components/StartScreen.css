@@ -1,0 +1,58 @@
+.wrapper {
+  border: 5px solid red;
+  border-radius: 5px;
+  background-color: transparent;
+  width: max-content;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+@font-face {
+  font-family: dbz-font;
+  src: url('../assets/font-dbz/Saiyan-Sans-Right-Oblique.ttf');
+}
+
+* {
+  font-family: dbz-font;
+  color: gold;
+  -webkit-text-stroke-width: 1px; 
+  -webkit-text-stroke-color: black;
+}
+
+.levels {
+  text-align: center;
+}
+
+.levels button {
+  background-color: transparent;
+  font-size: 2em;
+  border: none;
+}
+
+.levels button:hover {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+label {
+  font-size: 2em;
+  padding: 10px;
+}
+
+label img {
+  visibility: hidden;
+  margin-right: 5px;
+}
+
+.level {
+  width: 0;
+  height: 0;
+}
+
+label:hover img {
+  visibility: visible;
+}
+
+.level:checked + img {
+  visibility: visible;
+}

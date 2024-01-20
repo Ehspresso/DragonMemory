@@ -1,0 +1,19 @@
+.item-container {
+    transition: transform 0.3s;
+    padding: 1%;
+    box-sizing: border-box;
+}
+
+.item-container:hover {
+    transform: scale(0.8);
+}
+
+.container {
+    padding: 50px;
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
