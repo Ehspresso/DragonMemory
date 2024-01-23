@@ -5,6 +5,7 @@ import { TypeAnimation } from 'react-type-animation';
 export default function StartScreen({handleClick}) {
 
     const [visible, setVisible] = useState(false);
+    const [sound, setSound] = useState(false);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -13,6 +14,14 @@ export default function StartScreen({handleClick}) {
                 handleClick(input.value);
                 break;
             }
+        }
+    }
+
+    function handleOptionClick() {
+        if(!sound) {
+            const audio = document.querySelector("#sound-startup");
+            audio.play();
+            setSound(true);
         }
     }
 
@@ -29,9 +38,9 @@ export default function StartScreen({handleClick}) {
                 />
                 {visible && (
                 <form className="levels" onSubmit={handleSubmit}>
-                    <label><input className="level" name="level" type="radio" value="5" /><img src="src/assets/dragonball.png" style={{height: "15px", width: "15px"}}></img>Easy</label>
-                    <label><input className="level" name="level" type="radio" value="10" /><img src="src/assets/dragonball.png" style={{height: "15px", width: "15px"}}></img>Medium</label>
-                    <label><input className="level" name="level" type="radio" value="20" /><img src="src/assets/dragonball.png" style={{height: "15px", width: "15px"}}></img>Hard</label>
+                    <label><input onClick={handleOptionClick} className="level" name="level" type="radio" value="5" /><img src="src/assets/dragonball.png" style={{height: "15px", width: "15px"}}></img>Easy</label>
+                    <label><input onClick={handleOptionClick} className="level" name="level" type="radio" value="10" /><img src="src/assets/dragonball.png" style={{height: "15px", width: "15px"}}></img>Medium</label>
+                    <label><input onClick={handleOptionClick} className="level" name="level" type="radio" value="20" /><img src="src/assets/dragonball.png" style={{height: "15px", width: "15px"}}></img>Hard</label>
                     <br />
                     <button type="submit">Start Game</button>
                 </form>)}

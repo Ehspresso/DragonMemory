@@ -10,7 +10,7 @@ export default function GameScreen({level}) {
         <>
             {score != "Gameover!" && score != 5 && (
                 <>
-                    <h2>Score: {score}/5</h2>
+                    <h2>Score: {score}/{level}</h2>
                     <CardGallery level={level} onclick={{score: score, handler: setScore}}/>
                 </>)}
             

@@ -29,14 +29,13 @@ export default function CardGallery({level, onclick}) {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.log(onclick.score);
-    }, [onclick.score]);
-
     const shuffledImages = data.sort(() => Math.random() - 0.5);
     const cards = shuffledImages.slice(0, level);
 
     function handleOnclick(e) {
+        const audio = document.querySelector("#sound-select");
+        audio.play();
+        
         if(!selected.includes(e.target.src)) {
             onclick.handler(onclick.score+1);
             setSelected([...selected, e.target.src]);
@@ -49,12 +48,13 @@ export default function CardGallery({level, onclick}) {
     return(
         <div className="container">
             {cards.map(item => {
-                return (<div
-                key={cards.indexOf(item)}
-                className="item-container" 
-                style={{maxWidth: "9%"}} 
-                onClick={handleOnclick}
-                >
+                return (
+                    <div
+                    key={cards.indexOf(item)}
+                    className="item-container" 
+                    style={{maxWidth: "9%"}} 
+                    onClick={handleOnclick}
+                    >
                     <img src={item.image} style={{width: "100%"}}></img>
                 </div>
             );})}
