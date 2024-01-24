@@ -11,7 +11,6 @@ export default function Header() {
 
     function mute() {
         const sounds = document.querySelectorAll("audio");
-        console.log(sounds);
 
         sounds.forEach(el => {
             el.muted = !muted;
