@@ -2,8 +2,7 @@ import React from "react";
 import { useRef, useState, useEffect } from "react";
 import StartScreen from "./StartScreen";
 import GameScreen from "./GameScreen";
-import Header from "./Header"
-import "./App.css"
+import Header from "./Header";
 
 export default function App() { 
     let [play, setPlay] = useState(false);
