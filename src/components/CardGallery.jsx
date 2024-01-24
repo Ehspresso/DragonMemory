@@ -8,7 +8,6 @@ export default function CardGallery({level, onclick}) {
     const[selected, setSelected] = useState([]);
 
     useEffect(() => {
-        console.log("useEffect triggered!");
         const fetchData = async () => {
             try {
                 const response = await fetch("https://dragonball-api.com/api/characters");
