@@ -1,0 +1,15 @@
+#logo {
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+  }
+  
+  #dragon {
+    color: red;
+  }
+  
+  .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }

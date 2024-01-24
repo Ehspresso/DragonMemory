@@ -9,7 +9,7 @@
 
 @font-face {
   font-family: dbz-font;
-  src: url('../assets/font-dbz/Saiyan-Sans-Right-Oblique.ttf');
+  src: url('/assets/font-dbz/Saiyan-Sans-Right-Oblique.ttf');
 }
 
 * {

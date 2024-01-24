@@ -1,31 +1,9 @@
-#logo {
-  height: 40px;
-  width: 40px;
-  margin-right: 10px;
-}
-
-#dragon {
-  color: red;
-}
-
-.header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
   min-width: 100vh;
-  background-image:url('./src/assets/namek.jpg');
+  background-image:url('/assets/namek.jpg');
   background-size: cover;
   display: flex;
   justify-content: center;

@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import CardGallery from './CardGallery'
 import './GameScreen.css'
@@ -8,13 +9,13 @@ export default function GameScreen({level}) {
 
     return (
         <>
-            {score != "Gameover!" && score != 5 && (
+            {score != "Gameover!" && score != level && (
                 <>
                     <h2>Score: {score}/{level}</h2>
                     <CardGallery level={level} onclick={{score: score, handler: setScore}}/>
                 </>)}
             
-            {score == 5 && <h2>You win! Refresh the page to play again!</h2>}
+            {score == level && <h2>You win! Refresh the page to play again!</h2>}
             
             {score == "Gameover!" && <h2>Gameover! Refresh the page to play again!</h2>}
         </>
