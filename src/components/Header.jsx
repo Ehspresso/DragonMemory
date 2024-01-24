@@ -25,14 +25,14 @@ export default function Header() {
             <div className="icon" onClick={mute}>
                 <Icon path={volume} size={2} color={"red"} style={{padding: "10px"}}/>
                 <audio id="sound-startup">
-                    <source src="/assets/sound-startup.mp3"/>
+                    <source src="public/assets/sound-startup.mp3"/>
                 </audio>
                 <audio id="sound-select">
-                    <source src="/assets/sound-select.mp3"/>
+                    <source src="public/assets/sound-select.mp3"/>
                 </audio>
             </div>
             <h1 className="logo-container">
-                <img id="logo" src="/assets/dragonball.png"></img>
+                <img id="logo" src="public/assets/dragonball.png"></img>
                 <span id="dragon">Dragon</span>
                 <span>Memory</span>
             </h1>

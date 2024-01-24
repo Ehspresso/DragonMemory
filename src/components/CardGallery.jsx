@@ -13,13 +13,11 @@ export default function CardGallery({level, onclick}) {
             try {
                 const response = await fetch("https://dragonball-api.com/api/characters");
                 const data = await response.json();
-                console.log("re-render by first fetch!")
     
                 let planetData = [];
                 if (level == 20) {
                     const planetResponse = await fetch("https://dragonball-api.com/api/planets");
                     planetData = await planetResponse.json();
-                    console.log("re-render by second fetch!")
                 }
                 planetData.length === 0 ? setData(data.items) : setData([...data.items, ...planetData.items]);
             } catch (error) {
