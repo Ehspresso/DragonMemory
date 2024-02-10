@@ -19,10 +19,21 @@ export default function Header() {
         setVolume(muted ? mdiVolumeHigh : mdiVolumeOff);
     }
 
+async function handleSubmit(e) {
+    e.preventDefault();
+    const url = e.nativeEvent.submitter.value;
+    const data = new FormData(e.target);
+    const res = await fetch(`http://localhost:3000/${url}`, {
+        method: "post",
+        body: data
+        });
+    console.log(res.json());
+}
+
     return(
         <div className="header">
-            <div className="icon" onClick={mute}>
-                <Icon path={volume} size={2} color={"red"} style={{padding: "10px"}}/>
+            <div className="mute-button" onClick={mute}>
+                <Icon className="mute-icon" path={volume} size={2} color={"red"}/>
                 <audio id="sound-startup">
                     <source src="./assets/sound-startup.mp3"/>
                 </audio>
@@ -35,7 +46,14 @@ export default function Header() {
                 <span id="dragon">Dragon</span>
                 <span>Memory</span>
             </h1>
-            <div style={{width: "90.875px"}} className="placeholder"></div>
+            <div className="signin-container">
+            <form className="signin">
+                    <input className="signin" type="text" name="username" placeholder="username" required></input>
+                    <input className="signin" type="text" name="password" placeholder="password" required></input>
+                    <button className="signin" type="submit" name="action" value="login">Login</button>
+                    <button className="signin" type="submit" name="action2" value="signup">Signup</button>
+            </form>
+            </div>
         </div>
     );
 }

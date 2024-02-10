@@ -56,3 +56,8 @@ label:hover img {
 .level:checked + img {
   visibility: visible;
 }
+
+.signin {
+  font-family: Verdana;
+  color: black;
+}

@@ -5,17 +5,23 @@ const { getUser, getUsers, createUser } = require("./database.js");
 const bcrypt = require("bcryptjs");
 const session = require('express-session');
 require("dotenv").config();
+const cors = require("cors");
 
 const app = express();
 
+app.use(cors());
+
 app.use(express.urlencoded({ extended: false }));
+//app.use(express.json());
 
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: true }
+  cookie: { secure: false }
 }));
+
+//app.use(passport.authenticate('session'));
 
 passport.serializeUser(function(user, cb) {
   process.nextTick(function() {
@@ -42,6 +48,7 @@ passport.use(new LocalStrategy(async (username, password, cb) => {
         if(!match) {
             return cb(null, false, { message: "Incorrect password" });
         }
+        //console.log(user);
         return cb(null, user);
     } catch(err) {
         return cb(err);
@@ -53,13 +60,15 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!')
 });
 
+app.use(express.static(__dirname));
+
 app.post("/signup", (req, res) => {
     bcrypt.hash(req.body.password, 10, async (err, hashedpass) => {
         if(err) {
             throw err;
         } else {
-            await createUser(req.body.username, hashedpass);
-            res.redirect("http://localhost:5173/");
+            const user = await createUser(req.body.username, hashedpass);
+            res.json({username: req.body.username, password: req.body.password});
         }
     });
     return;
@@ -67,7 +76,9 @@ app.post("/signup", (req, res) => {
 
 app.post(
     "/login",
-    passport.authenticate("local", { successRedirect: 'http://localhost:5173/', failureRedirect: '/' }));
+    passport.authenticate("local"), (req, res) => {
+      res.json(req.user);
+    });
 
 app.listen(3000, () => {
     console.log('Server listening on port 3000...');

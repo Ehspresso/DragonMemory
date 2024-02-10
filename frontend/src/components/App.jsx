@@ -17,7 +17,7 @@ export default function App() {
         <>
             <Header />
             {!play ? <StartScreen handleClick={handleLevel}/> : <GameScreen level={level}/>}
-            <div style={{height: "90.875px"}}></div>
+            <div style={{maxHeight: "90.875px", height: "100%"}}></div>
         </>
     )
 }
