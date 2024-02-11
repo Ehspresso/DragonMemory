@@ -6,13 +6,15 @@ const bcrypt = require("bcryptjs");
 const session = require('express-session');
 require("dotenv").config();
 const cors = require("cors");
+const multer = require("multer");
+const upload = multer();
 
 const app = express();
 
 app.use(cors());
 
 app.use(express.urlencoded({ extended: false }));
-//app.use(express.json());
+app.use(upload.array());
 
 app.use(session({
   secret: process.env.SECRET,
@@ -27,6 +29,7 @@ passport.serializeUser(function(user, cb) {
   process.nextTick(function() {
     return cb(null, {
       username: user.username,
+      score: user.score,
     });
   });
 });
@@ -38,7 +41,6 @@ passport.deserializeUser(function(user, cb) {
 });
 
 passport.use(new LocalStrategy(async (username, password, cb) => {
-
     try {
         const user = await getUser(username);
         if(!user) {
@@ -48,7 +50,7 @@ passport.use(new LocalStrategy(async (username, password, cb) => {
         if(!match) {
             return cb(null, false, { message: "Incorrect password" });
         }
-        //console.log(user);
+        
         return cb(null, user);
     } catch(err) {
         return cb(err);
@@ -60,24 +62,22 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!')
 });
 
-app.use(express.static(__dirname));
+//app.use(express.static(__dirname));
 
 app.post("/signup", (req, res) => {
-    bcrypt.hash(req.body.password, 10, async (err, hashedpass) => {
-        if(err) {
-            throw err;
-        } else {
-            const user = await createUser(req.body.username, hashedpass);
-            res.json({username: req.body.username, password: req.body.password});
-        }
-    });
-    return;
+  let user;
+  bcrypt.hash(req.body.password, 10, async (err, hashedpass) => {
+      if(err) {
+          throw err;
+      }
+      user = await createUser(req.body.username, hashedpass);
+  });
+  res.json({username: req.body.username, score: null});
 });
 
 app.post(
-    "/login",
-    passport.authenticate("local"), (req, res) => {
-      res.json(req.user);
+    "/login", passport.authenticate('local'), (req, res) => {
+      res.json({username: req.user.username, score: req.user.score});
     });
 
 app.listen(3000, () => {

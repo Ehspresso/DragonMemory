@@ -27,7 +27,8 @@ async function handleSubmit(e) {
         method: "post",
         body: data
         });
-    console.log(res.json());
+    const response = await res.json();
+    console.log(response);
 }
 
     return(
@@ -47,7 +48,7 @@ async function handleSubmit(e) {
                 <span>Memory</span>
             </h1>
             <div className="signin-container">
-            <form className="signin">
+            <form className="signin" onSubmit={handleSubmit}>
                     <input className="signin" type="text" name="username" placeholder="username" required></input>
                     <input className="signin" type="text" name="password" placeholder="password" required></input>
                     <button className="signin" type="submit" name="action" value="login">Login</button>
