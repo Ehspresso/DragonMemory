@@ -17,3 +17,15 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+
+@font-face {
+  font-family: dbz-font;
+  src: url('/assets/font-dbz/Saiyan-Sans-Right-Oblique.ttf');
+}
+
+.dbz-font {
+  font-family: dbz-font;
+  color: gold;
+  -webkit-text-stroke-width: 1px; 
+  -webkit-text-stroke-color: black;
+}

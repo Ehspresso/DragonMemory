@@ -33,4 +33,12 @@ async function createUser(username, pass) {
     return getUser(username);
 }
 
-module.exports = {getUsers, getUser, createUser};
+async function changeScore(username, score) {
+    const[res] = await pool.query(`
+    update user
+    set score=?
+    where username=?`, [score, username]);
+    return getUser(username);
+}
+
+module.exports = {getUsers, getUser, createUser, changeScore};

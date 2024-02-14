@@ -28,22 +28,22 @@ export default function StartScreen({handleClick}) {
 
     return(
         <>
-            <div className="wrapper">
+            <div className="dbz-font wrapper">
                 <TypeAnimation
                     sequence={[
                         "Choose a level:",
                         () => {setVisible(true)}
                     ]}
                     className="level-animation"
-                    style={{fontSize: '3em'}}
+                    style={{fontSize: '1em'}}
                 />
                 {visible && (
-                <form className="levels" onSubmit={handleSubmit}>
+                <form className="dbz-font levels" onSubmit={handleSubmit}>
                     <label><input onClick={handleOptionClick} className="level" name="level" type="radio" value="5" /><img src="./assets/dragonball.png" style={{height: "15px", width: "15px"}}></img>Easy</label>
                     <label><input onClick={handleOptionClick} className="level" name="level" type="radio" value="10" /><img src="./assets/dragonball.png" style={{height: "15px", width: "15px"}}></img>Medium</label>
-                    <label><input onClick={handleOptionClick} className="level" name="level" type="radio" value="20" /><img src="./assets/dragonball.png" style={{height: "15px", width: "15px"}}></img>Hard</label>
+                    <label style={{marginRight: "20px"}}><input onClick={handleOptionClick} className="level" name="level" type="radio" value="20" /><img src="./assets/dragonball.png" style={{height: "15px", width: "15px"}}></img>Hard</label>
                     <br />
-                    <button type="submit">Start Game</button>
+                    <button className="dbz-font" type="submit">Start Game</button>
                 </form>)}
             </div>
         </>

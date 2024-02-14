@@ -1,0 +1,11 @@
+#message {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1em;
+    color: red;
+    text-align: center;
+  }
+  
+  .signin {
+    max-width: 200px;
+    text-align: center;
+  }

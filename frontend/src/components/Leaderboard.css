@@ -1,0 +1,15 @@
+.leaderboard {
+    display: none;
+    position: absolute;
+    list-style-type: none;
+}
+
+.leader-btn button {
+    height: 100%;
+    max-height: 30px;
+    margin-right: 10px;
+}
+
+.leader-btn:hover .leaderboard{
+    display:list-item;
+}
