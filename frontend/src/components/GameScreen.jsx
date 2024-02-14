@@ -9,10 +9,14 @@ export default function GameScreen({level, user}) {
     let time = useRef; 
 
     async function handleClick() {
-        const requestOptions = {
-            method: 'PUT',
-            body: time};
-        const res = await fetch('http://localhost:3000/add', requestOptions)
+        const res = await fetch('http://localhost:3000/add', {
+            method: "put",
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({"time": time.current}),
+            credentials: 'include',
+        });
+        response = await res.json();
+        console.log(response);
     }
 
     function setFinalTime(seconds) {

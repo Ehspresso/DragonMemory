@@ -5,9 +5,10 @@ import SigninForm from "./SigninForm";
 import MuteButton from "./MuteButton";
 import Leaderboard from "./Leaderboard";
 
-export default function Header({ user, setUser }) {
+export default function Header() {
 
     let [message, setMessage] = useState(null);
+    let [user, setUser] = useState(null);
 
     return(
         <div className="header">
@@ -23,7 +24,7 @@ export default function Header({ user, setUser }) {
                     :
                     <>
                         <h1 className="username dbz-font">{user.username}</h1>
-                        <Leaderboard />
+                        <Leaderboard user={user}/>
                         <form method="post" action="http://localhost:3000/signout"><button type="submit">Sign Out</button></form>
                     </>}
             </div>

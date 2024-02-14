@@ -1,7 +1,6 @@
 const express = require("express");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const { getUser, getUsers, createUser, changeScore } = require("./database.js");
+const { getUsers, createUser, changeScore } = require("./database.js");
 const bcrypt = require("bcryptjs");
 const session = require('express-session');
 require("dotenv").config();
@@ -10,26 +9,12 @@ const multer = require("multer");
 const upload = multer();
 
 const app = express();
-app.use(cors());
+app.use(express.json());
+app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
 app.use(express.urlencoded({ extended: false }));
 app.use(upload.array());
 
-passport.use(new LocalStrategy(async (username, password, cb) => {
-  try {
-      const user = await getUser(username);
-      if(!user) {
-          return cb(null, false, { message: "Incorrect username or password" });
-      }
-      const match = await bcrypt.compare(password, user.pass);
-      if(!match) {
-          return cb(null, false, { message: "Incorrect password or password" });
-      }
-      
-      return cb(null, user);
-  } catch(err) {
-      return cb(err);
-  }
-}));
+require("./config/passport.js")(passport);
 
 app.use(session({
   secret: process.env.SECRET,
@@ -38,24 +23,6 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.authenticate('session'));
-
-passport.serializeUser(function(user, cb) {
-  //console.log(user.username);
-  cb(null, { username: user.username });
-});
-
-passport.deserializeUser(async function(username, cb) {
-  //console.log(username);
-  try {
-    const user = await getUser(username);
-    if (!user) {
-      return cb(new Error('User not found'));
-    }
-    cb(null, user);
-  } catch (err) {
-    cb(err);
-  }
-});
 
 app.use((err, req, res, next) => {
   console.error(err.stack)
@@ -78,13 +45,17 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-app.post('/login', passport.authenticate('local'), (req, res) => {
-  console.log(req.user);
-  if(req.isAuthenticated()) {
-    return res.json({username: req.user.username, score: req.user.score, message: null});
-  } else {
-    return res.json({username: null, score: null, message: "Username or password is incorrect!"});
-  }
+app.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info, status) {
+    if (err) { return next(err) }
+    if (!user) { 
+      return res.json({username: null, score: null, message: "Username or password is incorrect!"}); 
+    }
+    req.login(user, function(err) {
+      if (err) { return next(err); }
+      return res.json({username: user.username, score: user.score, message: null});
+    });
+  })(req, res, next);
 });
 
 app.get('/scores', async (req, res) => {
@@ -104,17 +75,16 @@ app.post('/signout', (req, res, next) => {
 })
 
 app.put('/add', (req, res, next) => {
-
   if(req.isAuthenticated()) {
     try {
-      const user = changeScore(req.user.username, req.body.score);
+      const user = changeScore(req.user.username, req.body.time);
       return res.json(user);
     } catch(err) {
       next(err)
     }
   }
   res.sendStatus("400");
-  });
+});
 
 app.listen(3000, () => {
     console.log('Server listening on port 3000...');

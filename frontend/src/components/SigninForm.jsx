@@ -8,7 +8,8 @@ export default function SigninForm({setUser, setMessage, message }) {
         const data = new FormData(e.target);
         const res = await fetch(`http://localhost:3000/${url}`, {
             method: "post",
-            body: data
+            body: data,
+            credentials: 'include',
             });
         const {username, score, message} = await res.json();
         setUser(username != null ? {username, score} : null);

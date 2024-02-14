@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Leaderboard.css";
 
-export default function Leaderboard() {
+export default function Leaderboard({ user }) {
 
     let [leaderboard, setLeaderboard] = useState([]);
 
@@ -9,10 +9,10 @@ export default function Leaderboard() {
         async function getData() {
             const res = await fetch('http://localhost:3000/scores');
             const data = await res.json();
-            setLeaderboard([...data], leaderboard.sort((a, b) => {a.score - b.score}));
+            setLeaderboard([...data], leaderboard.sort((a, b) => {b.score - a.score}));
         }
         getData();
-    }, []);
+    }, [user]);
 
     return (
         <div className="leader-btn">

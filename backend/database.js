@@ -18,6 +18,7 @@ async function getUsers() {
 }
 
 async function getUser(username) {
+    //console.log(`username: ${username}`);
     const [row] = await pool.query(`
     select *
     from user
