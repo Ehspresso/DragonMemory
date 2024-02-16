@@ -1,9 +1,13 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=18.17.1"
+  },
   "description": "",
   "main": "app.js",
   "scripts": {
+    "build": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app.js"
   },

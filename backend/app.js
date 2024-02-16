@@ -7,10 +7,11 @@ require("dotenv").config();
 const cors = require("cors");
 const multer = require("multer");
 const upload = multer();
+const path = require("path");
 
 const app = express();
 app.use(express.json());
-app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(express.urlencoded({ extended: false }));
 app.use(upload.array());
 
@@ -23,6 +24,9 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.authenticate('session'));
+
+app.use(express.static(
+  path.join(__dirname,"../frontend/dist")));
 
 app.use((err, req, res, next) => {
   console.error(err.stack)

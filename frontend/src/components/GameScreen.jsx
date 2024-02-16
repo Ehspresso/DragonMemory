@@ -10,7 +10,7 @@ export default function GameScreen({ level, setUser }) {
 
     async function handleClick() {
         const score = time.current / (1/level);
-        const res = await fetch('http://localhost:3000/score', {
+        const res = await fetch(`https://dragon-memory.onrender.com/score`, {
             method: "put",
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({"score": score}),
