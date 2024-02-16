@@ -10,7 +10,7 @@ module.exports = function (passport) {
         if(!user) {
             return cb(null, false, { message: "Incorrect username or password" });
         }
-        const match = await bcrypt.compare(password, user.pass);
+        const match = await bcrypt.compare(password, user.password);
         if(!match) {
             return cb(null, false, { message: "Incorrect password or password" });
         }

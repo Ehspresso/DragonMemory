@@ -8,7 +8,7 @@ const client = createClient({
 
 async function getUsers() {
     const res = await client.execute("select * from user");
-    return res.rows[0];
+    return res.rows;
 }
 
 async function getUser(username) {
