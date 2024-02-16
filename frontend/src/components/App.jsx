@@ -7,6 +7,7 @@ import Header from "./Header";
 export default function App() { 
     let [play, setPlay] = useState(false);
     let [level, setLevel] = useState("5");
+    let [user, setUser] = useState(null);
 
     function handleLevel(level) {
         setLevel(level);
@@ -15,8 +16,8 @@ export default function App() {
 
     return (
         <>
-            <Header />
-            {!play ? <StartScreen handleClick={handleLevel}/> : <GameScreen level={level} />}
+            <Header userState={{ "user": user, "setUser": setUser }}/>
+            {!play ? <StartScreen handleClick={handleLevel}/> : <GameScreen level={level} setUser={setUser}/>}
             <div style={{maxHeight: "90.875px", height: "100%"}}></div>
         </>
     )

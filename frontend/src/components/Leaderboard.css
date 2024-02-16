@@ -1,7 +1,10 @@
 .leaderboard {
-    display: none;
-    position: absolute;
+    visibility: hidden;
     list-style-type: none;
+    max-height: 300px;
+    overflow-y: scroll;
+    margin: 0;
+    padding: 0;
 }
 
 .leader-btn button {
@@ -11,5 +14,9 @@
 }
 
 .leader-btn:hover .leaderboard{
-    display:list-item;
+    visibility: visible;
+}
+
+.leaderboard:hover {
+    visibility: visible;
 }

@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import "./Header.css";
 import SigninForm from "./SigninForm";
 import MuteButton from "./MuteButton";
 import Leaderboard from "./Leaderboard";
 
-export default function Header() {
+export default function Header({ userState }) {
 
     let [message, setMessage] = useState(null);
-    let [user, setUser] = useState(null);
 
     return(
         <div className="header">
@@ -19,12 +18,12 @@ export default function Header() {
                 <span className="logo dbz-font">Memory</span>
             </h1>
             <div className="right-container">
-                {user == null ?
-                    <SigninForm message={message} setMessage={setMessage} setUser={setUser} />
+                {userState.user == null ?
+                    <SigninForm message={message} setMessage={setMessage} setUser={userState.setUser} />
                     :
                     <>
-                        <h1 className="username dbz-font">{user.username}</h1>
-                        <Leaderboard user={user}/>
+                        <h1 className="username dbz-font">{userState.user.username}</h1>
+                        <Leaderboard user={userState.user}/>
                         <form method="post" action="http://localhost:3000/signout"><button type="submit">Sign Out</button></form>
                     </>}
             </div>

@@ -74,10 +74,10 @@ app.post('/signout', (req, res, next) => {
   });
 })
 
-app.put('/add', (req, res, next) => {
+app.put('/score', async (req, res, next) => {
   if(req.isAuthenticated()) {
     try {
-      const user = changeScore(req.user.username, req.body.time);
+      const user = await changeScore(req.user.username, req.body.score);
       return res.json(user);
     } catch(err) {
       next(err)

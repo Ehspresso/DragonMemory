@@ -3,25 +3,25 @@ import CardGallery from './CardGallery'
 import './GameScreen.css'
 import Stopwatch from "./Stopwatch";
 
-export default function GameScreen({level, user}) {
+export default function GameScreen({ level, setUser }) {
 
     const [score, setScore] = useState(0);
     let time = useRef; 
 
     async function handleClick() {
-        const res = await fetch('http://localhost:3000/add', {
+        const score = time.current / (1/level);
+        const res = await fetch('http://localhost:3000/score', {
             method: "put",
             headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({"time": time.current}),
+            body: JSON.stringify({"score": score}),
             credentials: 'include',
         });
-        response = await res.json();
-        console.log(response);
+        const response = await res.json();
+        setUser(response);
     }
 
     function setFinalTime(seconds) {
         time.current = seconds;
-        console.log(time.current);
     }
 
     return (
@@ -34,8 +34,11 @@ export default function GameScreen({level, user}) {
                 </div>)}
             
             {score == level && (
-            <button onClick={handleClick}>Add score to leaderboard!</button>)}
-            
+            <div className="controls">
+                <button onClick={handleClick}>Add score to leaderboard!</button>
+                <hr />
+                <form action="/"><button type="submit">Return to Home Screen</button></form>
+            </div>)}
             {score == "Gameover!" && <h2>Gameover! Refresh the page to play again!</h2>}
         </>
     )

@@ -9,17 +9,22 @@ export default function Leaderboard({ user }) {
         async function getData() {
             const res = await fetch('http://localhost:3000/scores');
             const data = await res.json();
-            setLeaderboard([...data], leaderboard.sort((a, b) => {b.score - a.score}));
+            setLeaderboard([...data], leaderboard.sort((a, b) => {a.score - b.score}));
         }
         getData();
     }, [user]);
 
     return (
-        <div className="leader-btn">
-            <button>Leaderboard</button>
+        <button className="leader-btn">
             <ul className="leaderboard">
-                {leaderboard.map(item => {return <li><p>{item.username}</p><p>{item.score}</p></li>})}
+                {leaderboard.map(item => {
+                    if(item.score != null) {
+                        return (<li><p>{item.username} {item.score}</p></li>);
+                    } else {
+                        return;
+                    }
+                })}
             </ul>
-        </div>
+        </button>
     );
 }
