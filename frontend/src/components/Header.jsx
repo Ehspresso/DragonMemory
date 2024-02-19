@@ -9,6 +9,10 @@ export default function Header({ userState, handleClick }) {
 
     let [message, setMessage] = useState(null);
 
+    async function handleLogout(e) {
+        localStorage.clear();
+    }
+
     return(
         <div className="header">
             <MuteButton />
@@ -24,7 +28,7 @@ export default function Header({ userState, handleClick }) {
                     :
                     <>
                         <h1 className="username dbz-font">{userState.user.username}</h1>
-                        <form method="post" action="https://dragon-memory.onrender.com/signout"><button type="submit">Sign Out</button></form>
+                        <form method="post" action="http://localhost:3000/logout"><button type="submit" onClick={handleLogout}>Log Out</button></form>
                     </>}
             </div>
         </div>

@@ -6,14 +6,14 @@ export default function SigninForm({setUser, setMessage, message }) {
         e.preventDefault();
         const url = e.nativeEvent.submitter.value;
         const data = new FormData(e.target);
-        const res = await fetch(`https://dragon-memory.onrender.com/${url}`, {
+        const res = await fetch(`http://localhost:3000/${url}`, {
             method: "post",
             body: data,
             credentials: 'include',
             });
         const {username, score, message} = await res.json();
         setUser(username != null ? {username, score} : null);
-        localStorage.setItem("user", {username: username, score: score});
+        localStorage.setItem("user", JSON.stringify({username, score}));
         setMessage(message);
     }
 

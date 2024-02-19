@@ -7,7 +7,7 @@ export default function Leaderboard({ user }) {
 
     useEffect(() => {
         async function getData() {
-            const res = await fetch('https://dragon-memory.onrender.com/scores');
+            const res = await fetch('http://localhost:3000/scores');
             const data = await res.json();
             setLeaderboard([...data], leaderboard.sort((a, b) => {a.score - b.score}));
         }

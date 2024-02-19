@@ -5,10 +5,10 @@ import GameScreen from "./GameScreen";
 import Header from "./Header";
 import Leaderboard from "./Leaderboard";
 
-export default function App() { 
+export default function App() {
     let [play, setPlay] = useState(false);
     let [level, setLevel] = useState("5");
-    let [user, setUser] = useState(localStorage.getItem("user") ? user : null);
+    let [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
     let [leaderboardClicked, setLeaderboardClicked] = useState(false);
 
     function handleLevel(level) {
