@@ -6,6 +6,7 @@ import Stopwatch from "./Stopwatch";
 export default function GameScreen({ level, setUser }) {
 
     const [score, setScore] = useState(0);
+    const [responded, setResponded] = useState(false);
     let time = useRef; 
 
     async function handleClick() {
@@ -18,6 +19,7 @@ export default function GameScreen({ level, setUser }) {
         });
         const response = await res.json();
         setUser(response);
+        setResponded(true);
     }
 
     function setFinalTime(seconds) {
@@ -35,11 +37,17 @@ export default function GameScreen({ level, setUser }) {
             
             {score == level && (
             <div className="controls">
-                <button onClick={handleClick}>Add score to leaderboard!</button>
+                <h2 className="dbz-font score">Score: {time.current / (1/level)}</h2>
+                <hr />
+                {!responded ? <button onClick={handleClick}>Add score to leaderboard!</button> : <h2 className="dbz-font">Score added!</h2>}
                 <hr />
                 <form action="/"><button type="submit">Return to Home Screen</button></form>
             </div>)}
-            {score == "Gameover!" && <h2>Gameover! Refresh the page to play again!</h2>}
+            {score == "Gameover!" && (
+            <div className="controls">
+                <h2>Gameover! Refresh the page to play again!</h2>
+                <form action="/"><button type="submit">Return to Home Screen</button></form>
+            </div>)}
         </>
     )
 }

@@ -15,16 +15,16 @@ export default function Leaderboard({ user }) {
     }, [user]);
 
     return (
-        <button className="leader-btn">
-            <ul className="leaderboard">
+        <div className="leaderboard">
+            <div className="leaderboard-header dbz-font">
+                <span>Username</span>
+                <span>Score</span>
+            </div>
+            <div className="leaderboard-scores">
                 {leaderboard.map(item => {
-                    if(item.score != null) {
-                        return (<li><p>{item.username} {item.score}</p></li>);
-                    } else {
-                        return;
-                    }
+                    return item.score && <div><span>{item.username}</span><span>{item.score}</span></div>
                 })}
-            </ul>
-        </button>
+            </div>
+        </div>
     );
 }

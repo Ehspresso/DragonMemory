@@ -74,7 +74,7 @@ app.get('/scores', async (req, res) => {
 app.post('/signout', (req, res, next) => {
   req.logout(function(err) {
   if (err) { return next(err); }
-  res.redirect('/');
+  res.redirect('https://dragon-memory.onrender.com');
   });
 })
 
@@ -88,8 +88,4 @@ app.put('/score', async (req, res, next) => {
     }
   }
   res.sendStatus("400");
-});
-
-app.listen(3000, () => {
-    console.log('Server listening on port 3000...');
 });
