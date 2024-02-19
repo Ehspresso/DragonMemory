@@ -13,7 +13,7 @@ export default function SigninForm({setUser, setMessage, message }) {
             });
         const {username, score, message} = await res.json();
         setUser(username != null ? {username, score} : null);
-        localStorage.setItem({"user": {username, score}});
+        localStorage.setItem("user", {username: username, score: score});
         setMessage(message);
     }
 
