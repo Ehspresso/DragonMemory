@@ -11,7 +11,7 @@ const path = require("path");
 
 const app = express();
 app.use(express.json());
-app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
+app.use(cors({ credentials: true, origin: 'https://dragon-memory.onrender.com' }));
 app.use(express.urlencoded({ extended: false }));
 app.use(upload.array());
 
@@ -75,7 +75,7 @@ app.post('/logout', (req, res, next) => {
   req.logout(function(err) {
   if (err) { return next(err); }
   //localStorage.clear();
-  res.redirect('http://localhost:5173/');
+  res.redirect('https://dragon-memory.onrender.com');
   });
 })
 

@@ -6,7 +6,7 @@ export default function SigninForm({setUser, setMessage, message }) {
         e.preventDefault();
         const url = e.nativeEvent.submitter.value;
         const data = new FormData(e.target);
-        const res = await fetch(`http://localhost:3000/${url}`, {
+        const res = await fetch(`https://dragon-memory.onrender.com/${url}`, {
             method: "post",
             body: data,
             credentials: 'include',
