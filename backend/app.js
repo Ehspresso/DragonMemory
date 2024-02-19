@@ -25,8 +25,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.authenticate('session'));
 
-/*app.use(express.static(
-  path.join(__dirname,"../frontend/dist")));*/
+app.use(express.static(
+  path.join(__dirname,"../frontend/dist")));
 
 app.use((err, req, res, next) => {
   console.error(err.stack)
