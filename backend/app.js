@@ -89,3 +89,5 @@ app.put('/score', async (req, res, next) => {
   }
   res.sendStatus("400");
 });
+
+app.listen();
