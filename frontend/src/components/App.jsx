@@ -8,7 +8,7 @@ import Leaderboard from "./Leaderboard";
 export default function App() { 
     let [play, setPlay] = useState(false);
     let [level, setLevel] = useState("5");
-    let [user, setUser] = useState(null);
+    let [user, setUser] = useState(localStorage.getItem("user") ? user : null);
     let [leaderboardClicked, setLeaderboardClicked] = useState(false);
 
     function handleLevel(level) {
