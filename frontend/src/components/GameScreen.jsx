@@ -10,7 +10,7 @@ export default function GameScreen({ level, setUser }) {
     let time = useRef; 
 
     async function handleClick() {
-        const score = time.current / (1/level);
+        const score = Math.max((1 / time.current) * level, 1);
         const res = await fetch(`https://dragon-memory.onrender.com/score`, {
             method: "put",
             headers: {'Content-Type':'application/json'},
