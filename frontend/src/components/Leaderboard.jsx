@@ -9,7 +9,8 @@ export default function Leaderboard({ user }) {
         async function getData() {
             const res = await fetch('https://dragon-memory.onrender.com/scores');
             const data = await res.json();
-            setLeaderboard([...data], leaderboard.sort((a, b) => {a.score - b.score}));
+            data.sort((a, b) => {a.score - b.score});
+            setLeaderboard([...data]);
         }
         getData();
     }, [user]);
